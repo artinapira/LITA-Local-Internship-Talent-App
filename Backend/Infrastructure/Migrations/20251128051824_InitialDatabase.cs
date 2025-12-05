@@ -26,6 +26,30 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Industries",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Industries", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Interests",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Interests", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "JobTypes",
                 columns: table => new
                 {
@@ -47,6 +71,18 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Locations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StudentSkills",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentSkills", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,13 +127,11 @@ namespace Infrastructure.Migrations
                     CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Employer_LocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     JobTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Industry = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Employer_ProfileImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     University = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StudyFieldId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     LocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Interests = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProfileImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -227,6 +261,29 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EmployerIndustry",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EmployerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IndustryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployerIndustry", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EmployerIndustry_AspNetUsers_EmployerId",
+                        column: x => x.EmployerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_EmployerIndustry_Industries_IndustryId",
+                        column: x => x.IndustryId,
+                        principalTable: "Industries",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Jobs",
                 columns: table => new
                 {
@@ -237,10 +294,12 @@ namespace Infrastructure.Migrations
                     EmployerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     JobTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     StudyFieldId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IndustryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RequiredSkills = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PostedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ClosesAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
+                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    StudentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -249,6 +308,16 @@ namespace Infrastructure.Migrations
                         name: "FK_Jobs_AspNetUsers_EmployerId",
                         column: x => x.EmployerId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Jobs_AspNetUsers_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Jobs_Industries_IndustryId",
+                        column: x => x.IndustryId,
+                        principalTable: "Industries",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Jobs_JobTypes_JobTypeId",
@@ -264,6 +333,52 @@ namespace Infrastructure.Migrations
                         name: "FK_Jobs_StudyFields_StudyFieldId",
                         column: x => x.StudyFieldId,
                         principalTable: "StudyFields",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StudentInterests",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StudentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    InterestsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentInterests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StudentInterests_AspNetUsers_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_StudentInterests_Interests_InterestsId",
+                        column: x => x.InterestsId,
+                        principalTable: "Interests",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StudentStudentSkills",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StudentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StudentSkillsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentStudentSkills", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StudentStudentSkills_AspNetUsers_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_StudentStudentSkills_StudentSkills_StudentSkillsId",
+                        column: x => x.StudentSkillsId,
+                        principalTable: "StudentSkills",
                         principalColumn: "Id");
                 });
 
@@ -363,9 +478,24 @@ namespace Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EmployerIndustry_EmployerId",
+                table: "EmployerIndustry",
+                column: "EmployerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployerIndustry_IndustryId",
+                table: "EmployerIndustry",
+                column: "IndustryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Jobs_EmployerId",
                 table: "Jobs",
                 column: "EmployerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Jobs_IndustryId",
+                table: "Jobs",
+                column: "IndustryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Jobs_JobTypeId",
@@ -378,9 +508,34 @@ namespace Infrastructure.Migrations
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Jobs_StudentId",
+                table: "Jobs",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Jobs_StudyFieldId",
                 table: "Jobs",
                 column: "StudyFieldId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentInterests_InterestsId",
+                table: "StudentInterests",
+                column: "InterestsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentInterests_StudentId",
+                table: "StudentInterests",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentStudentSkills_StudentId",
+                table: "StudentStudentSkills",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentStudentSkills_StudentSkillsId",
+                table: "StudentStudentSkills",
+                column: "StudentSkillsId");
         }
 
         /// <inheritdoc />
@@ -405,13 +560,31 @@ namespace Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "EmployerIndustry");
+
+            migrationBuilder.DropTable(
+                name: "StudentInterests");
+
+            migrationBuilder.DropTable(
+                name: "StudentStudentSkills");
+
+            migrationBuilder.DropTable(
                 name: "Jobs");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Interests");
+
+            migrationBuilder.DropTable(
+                name: "StudentSkills");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Industries");
 
             migrationBuilder.DropTable(
                 name: "JobTypes");

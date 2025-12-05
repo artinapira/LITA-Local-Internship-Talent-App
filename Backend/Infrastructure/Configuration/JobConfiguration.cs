@@ -34,6 +34,11 @@ namespace Infrastructure.Configuration
               .WithMany(x => x.Jobs)
               .HasForeignKey(x => x.StudyFieldId)
               .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne<Industry>(x => x.Industry)
+              .WithMany(x => x.Jobs)
+              .HasForeignKey(x => x.IndustryId)
+              .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

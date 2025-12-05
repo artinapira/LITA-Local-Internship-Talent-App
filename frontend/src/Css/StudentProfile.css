@@ -1,0 +1,152 @@
+main{
+    background-color: #D9D9D9;
+}
+.homepage{
+    background-image: url('../../public/home1.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    display: flex;
+    align-items: center; 
+    color: #501431;              
+    position: relative;
+    z-index: 1;
+}
+.hero_section {
+    height: 90vh;
+}
+h1{
+    font-weight: 590;
+}
+.content {
+    padding-top: 89px;
+    padding-left: 100px;
+}
+.pink_text{
+    color: #800020;
+}
+.home{
+    padding-top: 9rem;
+}
+.see_the_recipe {
+    background-color: #FFFFFF;
+    border-radius: 32px;
+    border: none;
+    max-width: 50%;
+    margin-left: 10rem;
+    color: #501431;
+    padding: 15px 5px;
+    transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1), color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.see_the_recipe:hover{
+    background-color: rgba(80, 20, 49, 1) !important;
+    color: white !important;
+}
+.clients{
+    background-color: #D9D9D9;
+    color: #501431;
+}
+.clients_section{
+    min-height: 135vh;
+    color: #501431;
+}
+.skills{
+    width: fit-content;
+    cursor:pointer;
+}
+.skills:hover{
+    background-color: #f9f9f9;
+}
+.content {
+    padding-top: 89px;
+    padding-left: 100px;
+}
+.data h2,h4{
+    padding: 1rem;
+    color: #501431;
+}
+.pfp{
+    margin-top: 5rem;
+    width: "150px";
+    height: "150px";
+    border-radius: "50%";
+    object-fit: cover;
+}
+.lines{
+    width: 200px !important;
+    background-color: #501431 !important;
+}
+
+.lineservice{
+    width: 74px;
+    height: 4px;
+    background-color: #CD8877;
+}
+.employer{
+    margin-left: 25rem;
+}
+.butoni{
+    background-color: #FFFFFF;
+    border-radius: 32px !important;
+    border: none;
+    color: #501431;
+    width: 30%;
+    margin-left: 25rem;
+    padding: 10px;
+}
+.butoni:hover{
+    color: #E34F73;
+}
+thead.table-head-custom th {
+  background-color: #501431;
+  color: white;
+}
+
+tbody.table-body-custom td,
+tbody.table-body-custom th {
+  background-color: #915066;
+  color: white;
+}
+.images {
+    display: flex;
+    gap: 1rem;
+}
+.filter-select {
+  min-width: 200px; 
+  max-width: 250px; 
+}
+
+.card-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+@media (max-width: 1400px) {
+    .butoni, .employer {
+        width: 80%;
+        text-align: right;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .butoni, .employer {
+        width: 80%;  
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 768px) {
+  .filter-select {
+    width: 100% !important;
+  }
+}
+@media (max-width: 770px) {
+    .images {
+        flex-direction: column;
+    }
+}

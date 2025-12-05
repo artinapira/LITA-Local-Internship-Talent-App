@@ -19,10 +19,12 @@ namespace Domain.Entities
         public JobType JobType { get; set; }
         public Guid StudyFieldId { get; set; }
         public StudyField StudyField { get; set; }
+        public Guid IndustryId { get; set; }
+        public Industry Industry { get; set; }
         public string RequiredSkills { get; set; }
         public DateTime PostedAt { get; set; } = DateTime.UtcNow;
         public DateTime ClosesAt { get; set; }
         public decimal? Salary { get; set; }
-        public ICollection<Application> Applications { get; set; } = new List<Application>();
+        public ICollection<JobApplication> Applications { get; set; } = new List<JobApplication>();
     }
 }

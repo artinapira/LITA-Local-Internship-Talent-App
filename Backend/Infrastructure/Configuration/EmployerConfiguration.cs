@@ -14,10 +14,6 @@ namespace Infrastructure.Configuration
         public void Configure(EntityTypeBuilder<Employer> builder) 
         {
 
-            builder.HasOne<JobType>(x => x.JobType)
-              .WithMany(x => x.Employers)
-              .HasForeignKey(x => x.JobTypeId)
-              .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne<Location>(x => x.Location)
               .WithMany(x => x.Employers)

@@ -191,3 +191,4 @@ C:\Users\herol\OneDrive\Documents\GitHub\LITA-Local-Internship-Talent-App\Backen
 C:\Users\herol\OneDrive\Documents\GitHub\LITA-Local-Internship-Talent-App\Backend\API\obj\Debug\net8.0\API.pdb
 C:\Users\herol\OneDrive\Documents\GitHub\LITA-Local-Internship-Talent-App\Backend\API\obj\Debug\net8.0\API.genruntimeconfig.cache
 C:\Users\herol\OneDrive\Documents\GitHub\LITA-Local-Internship-Talent-App\Backend\API\obj\Debug\net8.0\ref\API.dll
+C:\Users\herol\OneDrive\Documents\GitHub\LITA-Local-Internship-Talent-App\Backend\API\bin\Debug\net8.0\API.staticwebassets.runtime.json

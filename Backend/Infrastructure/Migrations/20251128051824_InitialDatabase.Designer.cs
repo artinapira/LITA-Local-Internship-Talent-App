@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251123234603_InitialDatabase")]
+    [Migration("20251128051824_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />
@@ -25,7 +25,120 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entities.Application", b =>
+            modelBuilder.Entity("Domain.Entities.EmployerIndustry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EmployerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IndustryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployerId");
+
+                    b.HasIndex("IndustryId");
+
+                    b.ToTable("EmployerIndustry");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Industry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Industries");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Interests", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Interests");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Job", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ClosesAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EmployerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IndustryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("JobTypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("LocationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("PostedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RequiredSkills")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("Salary")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("StudyFieldId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployerId");
+
+                    b.HasIndex("IndustryId");
+
+                    b.HasIndex("JobTypeId");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("StudyFieldId");
+
+                    b.ToTable("Jobs");
+                });
+
+            modelBuilder.Entity("Domain.Entities.JobApplication", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -54,58 +167,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("Applications");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Job", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ClosesAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("EmployerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("JobTypeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("LocationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("PostedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RequiredSkills")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("Salary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid>("StudyFieldId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployerId");
-
-                    b.HasIndex("JobTypeId");
-
-                    b.HasIndex("LocationId");
-
-                    b.HasIndex("StudyFieldId");
-
-                    b.ToTable("Jobs");
                 });
 
             modelBuilder.Entity("Domain.Entities.JobType", b =>
@@ -164,6 +225,63 @@ namespace Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.StudentInterests", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("InterestsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InterestsId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentInterests");
+                });
+
+            modelBuilder.Entity("Domain.Entities.StudentSkills", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StudentSkills");
+                });
+
+            modelBuilder.Entity("Domain.Entities.StudentStudentSkills", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("StudentSkillsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("StudentSkillsId");
+
+                    b.ToTable("StudentStudentSkills");
                 });
 
             modelBuilder.Entity("Domain.Entities.StudyField", b =>
@@ -374,10 +492,6 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Industry")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("JobTypeId")
                         .HasColumnType("uniqueidentifier");
 
@@ -410,10 +524,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Interests")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("LocationId")
                         .HasColumnType("uniqueidentifier");
@@ -449,7 +559,73 @@ namespace Infrastructure.Migrations
                     b.HasDiscriminator().HasValue("UserRole");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Application", b =>
+            modelBuilder.Entity("Domain.Entities.EmployerIndustry", b =>
+                {
+                    b.HasOne("Domain.Entities.Employer", "Employer")
+                        .WithMany("EmployerIndustry")
+                        .HasForeignKey("EmployerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Industry", "Industry")
+                        .WithMany("EmployerIndustry")
+                        .HasForeignKey("IndustryId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Employer");
+
+                    b.Navigation("Industry");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Job", b =>
+                {
+                    b.HasOne("Domain.Entities.Employer", "Employer")
+                        .WithMany("Jobs")
+                        .HasForeignKey("EmployerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Industry", "Industry")
+                        .WithMany("Jobs")
+                        .HasForeignKey("IndustryId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.JobType", "JobType")
+                        .WithMany("Jobs")
+                        .HasForeignKey("JobTypeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Location", "Location")
+                        .WithMany("Jobs")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Student", null)
+                        .WithMany("Jobs")
+                        .HasForeignKey("StudentId");
+
+                    b.HasOne("Domain.Entities.StudyField", "StudyField")
+                        .WithMany("Jobs")
+                        .HasForeignKey("StudyFieldId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Employer");
+
+                    b.Navigation("Industry");
+
+                    b.Navigation("JobType");
+
+                    b.Navigation("Location");
+
+                    b.Navigation("StudyField");
+                });
+
+            modelBuilder.Entity("Domain.Entities.JobApplication", b =>
                 {
                     b.HasOne("Domain.Entities.Job", "Job")
                         .WithMany("Applications")
@@ -468,39 +644,42 @@ namespace Infrastructure.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Job", b =>
+            modelBuilder.Entity("Domain.Entities.StudentInterests", b =>
                 {
-                    b.HasOne("Domain.Entities.Employer", "Employer")
-                        .WithMany("Jobs")
-                        .HasForeignKey("EmployerId")
+                    b.HasOne("Domain.Entities.Interests", "Interests")
+                        .WithMany("StudentInterests")
+                        .HasForeignKey("InterestsId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.JobType", "JobType")
-                        .WithMany("Jobs")
-                        .HasForeignKey("JobTypeId")
+                    b.HasOne("Domain.Entities.Student", "Student")
+                        .WithMany("StudentInterests")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Location", "Location")
-                        .WithMany("Jobs")
-                        .HasForeignKey("LocationId")
+                    b.Navigation("Interests");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("Domain.Entities.StudentStudentSkills", b =>
+                {
+                    b.HasOne("Domain.Entities.Student", "Student")
+                        .WithMany("StudentStudentSkills")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.StudyField", "StudyField")
-                        .WithMany("Jobs")
-                        .HasForeignKey("StudyFieldId")
+                    b.HasOne("Domain.Entities.StudentSkills", "StudentSkills")
+                        .WithMany("StudentStudentSkills")
+                        .HasForeignKey("StudentSkillsId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Employer");
+                    b.Navigation("Student");
 
-                    b.Navigation("JobType");
-
-                    b.Navigation("Location");
-
-                    b.Navigation("StudyField");
+                    b.Navigation("StudentSkills");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -596,6 +775,18 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Industry", b =>
+                {
+                    b.Navigation("EmployerIndustry");
+
+                    b.Navigation("Jobs");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Interests", b =>
+                {
+                    b.Navigation("StudentInterests");
+                });
+
             modelBuilder.Entity("Domain.Entities.Job", b =>
                 {
                     b.Navigation("Applications");
@@ -622,6 +813,11 @@ namespace Infrastructure.Migrations
                     b.Navigation("UserRoles");
                 });
 
+            modelBuilder.Entity("Domain.Entities.StudentSkills", b =>
+                {
+                    b.Navigation("StudentStudentSkills");
+                });
+
             modelBuilder.Entity("Domain.Entities.StudyField", b =>
                 {
                     b.Navigation("Jobs");
@@ -636,12 +832,20 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Employer", b =>
                 {
+                    b.Navigation("EmployerIndustry");
+
                     b.Navigation("Jobs");
                 });
 
             modelBuilder.Entity("Domain.Entities.Student", b =>
                 {
                     b.Navigation("Applications");
+
+                    b.Navigation("Jobs");
+
+                    b.Navigation("StudentInterests");
+
+                    b.Navigation("StudentStudentSkills");
                 });
 #pragma warning restore 612, 618
         }

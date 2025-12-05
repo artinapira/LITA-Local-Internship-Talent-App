@@ -15,10 +15,13 @@ namespace Domain.Entities
         public StudyField StudyField { get; set; }
         public Guid LocationId { get; set; }
         public Location Location { get; set; }
-        public string Interests { get; set; }
-        public string ProfileImagePath { get; set; }
+        public string? ProfileImagePath { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public ICollection<Application> Applications { get; set; } = new List<Application>();
+        public ICollection<Job> Jobs { get; set; } = new List<Job>();
+        public ICollection<JobApplication> Applications { get; set; } = new List<JobApplication>();
+        public ICollection<StudentInterests> StudentInterests { get; set; } = new List<StudentInterests>();
+        public ICollection<StudentStudentSkills> StudentStudentSkills { get; set; } = new List<StudentStudentSkills>();
+
 
     }
 }

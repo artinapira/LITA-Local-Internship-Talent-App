@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Enum
+namespace Domain.Model
 {
-    public enum Role
+    public class LocationModel
     {
-        Admin,
-        Employer,
-        Student
+        public Guid? Id { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -11,10 +11,9 @@ namespace Domain.Entities
         public string CompanyName { get; set; }
         public Guid LocationId { get; set; }
         public Location Location { get; set; }
-        public Guid JobTypeId { get; set; }
-        public JobType JobType { get; set; }
-        public string Industry { get; set; }
         public string ProfileImagePath { get; set; }
         public ICollection<Job> Jobs { get; set; } = new List<Job>();
+        public ICollection<EmployerIndustry> EmployerIndustry { get; set; } = new List<EmployerIndustry>();
+
     }
 }

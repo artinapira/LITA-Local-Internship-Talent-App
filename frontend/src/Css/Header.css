@@ -1,0 +1,140 @@
+header{
+    background-color: rgba(80, 20, 49, 1);
+    color: aliceblue;
+    padding: 1.1rem;
+    height: 5.2rem;
+}
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.search-container {
+    position: relative;
+    display: inline-block;
+}
+
+.search-input {
+    min-width: 200px;
+    background-color: white;
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    border-color: #86b7fe;
+}
+
+.search-modal {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-results {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.modal-results::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-results::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.modal-results::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.modal-results::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+@media (max-width: 768px) {
+    .search-input {
+        min-width: 150px;
+    }
+    .container {
+        gap: 10rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .search-input {
+        min-width: 120px;
+    }
+}
+
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+
+@media (max-width: 991px) {
+    .navbar-collapse{
+        position: absolute;
+        top: 5rem;
+        right: 0;
+        left: 0;
+        width: 100%;
+    }
+    .navbar-nav {
+        background-color: white !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        padding: 1rem !important;
+        margin-top: 0.5rem !important;
+    }
+    
+    .navbar-nav .nav-link {
+        color: #333 !important;
+        padding: 0.75rem 1rem !important;
+        margin: 0.25rem 0 !important;
+        border-radius: 4px !important;
+        transition: background-color 0.2s ease !important;
+    }
+    
+    .navbar-nav .nav-link:hover {
+        background-color: #f8f9fa !important;
+        color: #501431 !important;
+    }
+    
+    .navbar-nav .search-container {
+        margin: 0.75rem 0 !important;
+        width: 100% !important;
+    }
+    
+    .navbar-nav .search-container .search-input {
+        width: 100% !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .navbar-nav .btn {
+        margin-top: 0.5rem !important;
+        width: 15% !important;
+        justify-content: center !important;
+        align-items: center;
+    }
+    
+    .navbar-toggler {
+        border-color: rgba(255, 255, 255, 0.5) !important;
+    }
+    
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    }
+}
+
+.navbar-nav .nav-link {
+    margin: 0 0.25rem !important;
+}

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Configuration
 {
-    public class ApplicationConfiguration : IEntityTypeConfiguration<Application>
+    public class ApplicationConfiguration : IEntityTypeConfiguration<JobApplication>
     {
-        public void Configure(EntityTypeBuilder<Application> builder)
+        public void Configure(EntityTypeBuilder<JobApplication> builder)
         {
             builder.HasKey(x => x.Id);
 
