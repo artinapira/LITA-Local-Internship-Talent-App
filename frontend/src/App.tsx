@@ -105,7 +105,7 @@ function App() {
 
         <Route path="/IndustryTable" element={<AdminRoute component={IndustryTable} />}/>
         <Route path="/EditIndustry/:id" element={<AdminRoute component={EditIndustry} />}/>
-        <Route path="/AddJobType/" element={<AdminRoute component={EditIndustry} />}/>
+        <Route path="/AddIndustry/" element={<AdminRoute component={EditIndustry} />}/>
         <Route path="/AdminDashboard" element={<AdminRoute component={AdminDashboard} />} />
 
         </Route>

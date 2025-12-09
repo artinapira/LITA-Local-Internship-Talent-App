@@ -55,6 +55,7 @@ const Sidebar = ({ collapsed, toggleSidebar }) => {
     { name: "Location", path: "/LocationTable", icon: <MdLocationOn /> },
     { name: "Student", path: "/StudentTable", icon: <MdLocationOn /> },
     { name: "StudentSkills", path: "/StudentSkillsTable", icon: <MdSchedule /> },
+    { name: "Interests", path: "/InterestsTable", icon: <MdSchedule /> },
     { name: "StudyField", path: "/StudyFieldTable", icon: <MdPeople /> },
     { name: "Home", path: "/Home", icon: <MdDashboard /> },
     { name: "Logout", path: "/", icon: <FaSignOutAlt /> },

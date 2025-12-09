@@ -118,6 +118,7 @@ export function Header(){
             {userRole === "Employer" && <Nav.Link className="mx-2 mx-md-4 nav-link" as={Link} to="/Jobs">Jobs</Nav.Link>}
             {userRole === "Student" && <Nav.Link className="mx-2 mx-md-4 nav-link" as={Link} to="/FindJob">Find Job</Nav.Link>}
             {userRole === "Student" && <Nav.Link className="mx-2 mx-md-4 nav-link" as={Link} to="/StudentProfile">Profile</Nav.Link>}
+            {userRole === "Admin" && <Nav.Link className="mx-2 mx-md-4 nav-link" as={Link} to="/AdminDashboard">Dashboard</Nav.Link>}
             {userRole === "Employer" && <Nav.Link className="mx-2 mx-md-4 nav-link" as={Link} to="/EmployerProfile">Profile</Nav.Link>}
             <SearchBar role={userRole}  />
              <Button
