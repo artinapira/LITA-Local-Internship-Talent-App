@@ -680,20 +680,6 @@ console.log(studenti)
 
                 <div className="modal-body">
                     <form className='ui form' style={{ backgroundColor: "#f9f9f9", padding: "20px" }} onSubmit={handleApplicationSubmit} autoComplete="off">
-                        <div className="col-md-6-w-100%">
-                          <select className="form-control"
-                            name="jobId" 
-                            id="jobId"
-                            value= {applicationValues.jobId || ""}
-                            onChange={handleApplicationSelectChange}
-                            style={{ marginBottom: "15px"}}
-                          >
-                            <option value="" disabled>Select Job</option>
-                              {jobList.map((x) => (
-                            <option key={x.id} value={x.id!}>{x.title}</option>
-                            ))}
-                          </select>
-                        </div>
                       <div className="form-group">
                         <label>Upload CV</label>
                         <input
